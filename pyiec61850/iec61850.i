@@ -31,7 +31,19 @@ DataAttribute* toDataAttribute(ModelNode * MN)
 DataObject* toDataObject(ModelNode * MN)
 { return (DataObject*)MN;}
 %}
-%apply int *OUTPUT {IedClientError* error};
+// Exception-based error handling - minimal wrapper changes needed
+// This removes IedClientError* parameters and throws Python exceptions on error
+%typemap(in,numinputs=0) IedClientError* error (IedClientError temp) {
+    $1 = &temp;
+}
+
+%typemap(argout) IedClientError* error {
+    if (temp$argnum != IED_ERROR_OK) {
+        const char* error_msg = IedClientError_toString(temp$argnum);
+        PyErr_SetString(PyExc_RuntimeError, error_msg ? error_msg : "IEC 61850 operation failed");
+        SWIG_fail;
+    }
+}
 
 %include "cstring.i"
 %cstring_bounded_output(char *buffer, 1024);
