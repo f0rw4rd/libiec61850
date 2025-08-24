@@ -9,7 +9,6 @@
 #include <iec61850_client.h>
 #include <iec61850_model.h>
 #include <iec61850_server.h>
-#include <tls_config.h>
 #include <sv_publisher.h>
 #include <sv_subscriber.h>
 ModelNode* toModelNode(LogicalNode * ln)
