@@ -4,12 +4,14 @@
 %ignore CDA_OperBoolean(ModelNode* parent, bool isTImeActivated);
 %ignore LogicalNode_hasBufferedReports(LogicalNode* node);
 %ignore LogicalNode_hasUnbufferedReports(LogicalNode* node);
-%ignore MmsConnection_setIsoConnectionParameters(MmsConnection self, IsoConnectionParameters* params);
 %include "stdint.i"
 %{
 #include <iec61850_client.h>
 #include <iec61850_model.h>
 #include <iec61850_server.h>
+#include <tls_config.h>
+#include <sv_publisher.h>
+#include <sv_subscriber.h>
 ModelNode* toModelNode(LogicalNode * ln)
 {
     return (ModelNode*) ln;
@@ -48,10 +50,14 @@ DataObject* toDataObject(ModelNode * MN)
 %include "iec61850_cdc.h"
 %include "linked_list.h"
 %include "iec61850_config_file_parser.h"
+%include "tls_config.h"
+%include "sv_publisher.h"
+%include "sv_subscriber.h"
 
 /* User-defined data types, also used: */
 typedef uint64_t msSinceEpoch;
 typedef uint64_t nsSinceEpoch;
+
 
 ModelNode* toModelNode(LogicalNode *);
 ModelNode* toModelNode(DataObject *);
