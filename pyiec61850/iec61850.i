@@ -61,7 +61,6 @@ DataObject* toDataObject(ModelNode * MN)
 %include "iec61850_cdc.h"
 %include "linked_list.h"
 %include "iec61850_config_file_parser.h"
-%include "tls_config.h"
 %include "sv_publisher.h"
 %include "sv_subscriber.h"
 
